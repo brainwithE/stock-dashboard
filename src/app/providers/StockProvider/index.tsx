@@ -22,11 +22,11 @@ export function useStock() {
 }
 
 export function StockProvider(props: Props): JSX.Element {
-  const [searchMatches, setSearchMatches] = React.useState<any>([]);
-  const [selectedStock, setSelectedStock] = React.useState<any>({});
-  const [latestStockData, setLatestStockData] = React.useState<any>([]);
-  const [chartData, setChartData] = React.useState<any>({});
-  const [companyProfile, setCompanyProfile] = React.useState<any>({});
+  const [searchMatches, setSearchMatches] = React.useState<Object[]>([]);
+  const [selectedStock, setSelectedStock] = React.useState<Object>({});
+  const [latestStockData, setLatestStockData] = React.useState<Object[]>([]);
+  const [chartData, setChartData] = React.useState<Object>({});
+  const [companyProfile, setCompanyProfile] = React.useState<Object>({});
 
   const searchStock = async ticker => {
     try {
