@@ -8,13 +8,15 @@
 
 import * as React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Switch, Route, BrowserRouter } from 'react-router-dom';
+import { Route, BrowserRouter, Routes } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import { GlobalStyle } from 'styles/global-styles';
 
-import { HomePage } from './pages/HomePage/Loadable';
+import { Dashboard } from './pages/Dashboard/Loadable';
 import { NotFoundPage } from './components/NotFoundPage/Loadable';
-import { useTranslation } from 'react-i18next';
+import { ROOT_PATH } from './constants/route';
+import { StockProvider } from './providers/StockProvider';
 
 export function App() {
   const { i18n } = useTranslation();
@@ -28,10 +30,13 @@ export function App() {
         <meta name="description" content="A React Boilerplate application" />
       </Helmet>
 
-      <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Route component={NotFoundPage} />
-      </Switch>
+      <StockProvider>
+        <Routes>
+          <Route path={ROOT_PATH} element={<Dashboard />} />
+          <Route element={<NotFoundPage />} />
+        </Routes>
+      </StockProvider>
+
       <GlobalStyle />
     </BrowserRouter>
   );
