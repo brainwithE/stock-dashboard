@@ -12,6 +12,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import SearchIcon from '@mui/icons-material/Search';
+import { debounce } from 'lodash';
 
 import { useStock } from 'app/providers/StockProvider';
 import { Autocomplete, Container, TextField } from '@mui/material';
@@ -78,8 +79,12 @@ export const AppBarHeader = memo((props: Props) => {
   } = useStock();
 
   const handleSearchStock = event => {
-    searchStock(event.target.value);
+    debouncedSearch(event.target.value);
   };
+
+  const debouncedSearch = debounce(symbol => {
+    searchStock(symbol);
+  }, 500);
 
   const handleSelectStock = (_, stockData) => {
     selectStock(stockData);
